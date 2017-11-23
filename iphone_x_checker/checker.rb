@@ -37,6 +37,7 @@ module IphoneXChecker
         send_notification
       else
         print_unavailable_message
+        reset_tries
       end
     end
 
