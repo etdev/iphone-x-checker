@@ -42,17 +42,6 @@ module IphoneXChecker
       ENV["SMTP_HOST"] || "smtp.gmail.com"
     end
 
-    def message_body
-      <<~BODY
-        THE IPHONE X IS AVAILABLE:
-        https://www.apple.com/jp/shop/buy-iphone/iphone-x#00,10
-      BODY
-    end
-
-    def message_subject
-      "iPhone X is available!"
-    end
-
     def name
       ENV["NAME"]
     end
@@ -63,11 +52,21 @@ module IphoneXChecker
 
     def address
       ENV["ADDRESS"]
-      # "ericturner@gmail.com"
     end
 
     def password
       ENV["PASSWORD"]
+    end
+
+    def message_subject
+      "iPhone X is available!"
+    end
+
+    def message_body
+      <<~BODY
+        THE IPHONE X IS AVAILABLE:
+        https://www.apple.com/jp/shop/buy-iphone/iphone-x#00,10
+      BODY
     end
   end
 end

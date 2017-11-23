@@ -1,6 +1,7 @@
 module IphoneXChecker
   class Checker
     URL = "https://www.apple.com/jp/shop/retail/pickup-message?pl=true&parts.0=MQAY2J/A&location=106-0031".freeze
+    # 64GB silver - this and URL need to be changed otherwise
     MODEL_NUMBER = "MQAY2J/A".freeze
     STORE_NAMES = %w(渋谷 表参道 銀座).freeze
 
