@@ -57,7 +57,7 @@ module IphoneXChecker
     end
 
     def available?
-      !statuses.any? { |status| !%w(ineligible unavailable).include? status }
+      statuses.any? { |status| !%w(ineligible unavailable).include? status }
     end
 
     def send_notification
