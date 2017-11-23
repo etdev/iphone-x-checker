@@ -5,8 +5,8 @@ module IphoneXChecker
     STORE_NAMES = %w(渋谷 表参道 銀座).freeze
 
     MAX_TRIES_PER_ROUND = 2
-    # check every 3 minutes
-    BETWEEN_CHECKS_COOLDOWN = 180
+    # check every minute
+    BETWEEN_CHECKS_COOLDOWN = 60
     # after notifying twice, wait an hour before checking again
     BETWEEN_ROUNDS_COOLDOWN = 3600
 
@@ -32,7 +32,11 @@ module IphoneXChecker
     def check_availability
       fetch_data
 
-      send_notification if available?
+      if available?
+        send_notification
+      else
+        print_unavailable_message
+      end
     end
 
     def fetch_data
@@ -52,12 +56,16 @@ module IphoneXChecker
     end
 
     def available?
-      statuses.any? { |status| !%w(ineligible unavailable).include? status }
+      !statuses.any? { |status| !%w(ineligible unavailable).include? status }
     end
 
     def send_notification
       Emailer.new.send_email
-      puts "Notification sent at #{Time.now.strftime('%Y-%m-%d %H:%M:%S')}"
+      puts "Available - notification sent [#{current_time_jst}]"
+    end
+
+    def current_time_jst
+      (Time.now + (9 * 3600)).strftime("%Y-%m-%d %H:%M:%S")
     end
 
     def check_tries
@@ -78,6 +86,10 @@ module IphoneXChecker
       check_tries
       yield
       increment_tries
+    end
+
+    def print_unavailable_message
+      puts "Not available [#{current_time_jst}]"
     end
   end
 end
