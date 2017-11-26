@@ -1,5 +1,3 @@
-require "rest-client"
-
 module IphoneXChecker
   class Response
     STORE_NAMES = %w(渋谷 表参道 銀座).freeze
