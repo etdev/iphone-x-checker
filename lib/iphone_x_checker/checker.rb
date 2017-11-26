@@ -1,7 +1,7 @@
 module IphoneXChecker
   class Checker
     # check every minute
-    BETWEEN_CHECKS_COOLDOWN = 30
+    BETWEEN_CHECKS_COOLDOWN = 60
 
     def initialize
       @fetcher = Fetcher.new
